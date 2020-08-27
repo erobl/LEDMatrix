@@ -1,6 +1,7 @@
 #include <ESP8266React.h>
 #include <LightMqttSettingsService.h>
 #include <LightStateService.h>
+#include <ClockService.h>
 
 #define SERIAL_BAUD_RATE 115200
 
@@ -12,6 +13,9 @@ LightStateService lightStateService = LightStateService(&server,
                                                         esp8266React.getSecurityManager(),
                                                         esp8266React.getMqttClient(),
                                                         &lightMqttSettingsService);
+
+ClockService clockService = ClockService(&server);
+
 
 void setup() {
   // start serial and filesystem
@@ -26,6 +30,9 @@ void setup() {
   // start the light service
   lightMqttSettingsService.begin();
 
+  // start the clock service
+  clockService.begin();
+
   // start the server
   server.begin();
 }
@@ -33,4 +40,7 @@ void setup() {
 void loop() {
   // run the framework's loop function
   esp8266React.loop();
+
+  // run clock loop
+  clockService.loop();
 }

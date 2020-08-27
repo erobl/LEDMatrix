@@ -5,6 +5,7 @@ import { PROJECT_PATH } from '../api';
 import { AuthenticatedRoute } from '../authentication';
 
 import DemoProject from './DemoProject';
+import Clock from './Clock';
 
 class ProjectRouting extends Component {
 
@@ -17,6 +18,7 @@ class ProjectRouting extends Component {
           */
         }
         <AuthenticatedRoute exact path={`/${PROJECT_PATH}/demo/*`} component={DemoProject} />
+        <AuthenticatedRoute exact path={`/${PROJECT_PATH}/clock/*`} component={Clock} />
         {
           /*
           * The redirect below caters for the default project route and redirecting invalid paths.
